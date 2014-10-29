@@ -83,12 +83,12 @@ function rotx(thx){
 	Rx.set(0, 2, 0);
 	Rx.set(0, 3, 0);
 	Rx.set(1, 0, 0);
-	Rx.set(1, 1, cos(thx));
-	Rx.set(1, 2, -sin(thx));
+	Rx.set(1, 1, Math.cos(thx));
+	Rx.set(1, 2, -(Math.sin(thx));
 	Rx.set(1, 3, 0);
 	Rx.set(2, 0, 0);
-	Rx.set(2, 1, sin(thx));
-	Rx.set(2, 2, cos(thx));
+	Rx.set(2, 1, Math.sin(thx));
+	Rx.set(2, 2, Math.cos(thx));
 	Rx.set(2, 3, 0);
 	Rx.set(3, 0, 0);
 	Rx.set(3, 1, 0);
@@ -97,17 +97,17 @@ function rotx(thx){
 }
 
 function roty(thy){
-	Ry.set(0, 0, cos(thy));
+	Ry.set(0, 0, Math.cos(thy));
 	Ry.set(0, 1, 0);
-	Ry.set(0, 2, sin(thy));
+	Ry.set(0, 2, Math.sin(thy));
 	Ry.set(0, 3, 0);
 	Ry.set(1, 0, 0);
 	Ry.set(1, 1, 1);
 	Ry.set(1, 2, 0);
 	Ry.set(1, 3, 0);
-	Ry.set(2, 0, -sin(thy));
+	Ry.set(2, 0, -(Math.sin(thy));
 	Ry.set(2, 1, 0);
-	Ry.set(2, 2, cos(thy));
+	Ry.set(2, 2, Math.cos(thy));
 	Ry.set(2, 3, 0);
 	Ry.set(3, 0, 0);
 	Ry.set(3, 1, 0);
@@ -116,12 +116,12 @@ function roty(thy){
 }
 
 function rotz(thz){
-	Rz.set(0, 0, cos(thz));
-	Rz.set(0, 1, -sin(thz));
+	Rz.set(0, 0, Math.cos(thz));
+	Rz.set(0, 1, -(Math.sin(thz));
 	Rz.set(0, 2, 0);
 	Rz.set(0, 3, 0);
-	Rz.set(1, 0, sin(thz));
-	Rz.set(1, 1, cos(thx));
+	Rz.set(1, 0, Math.sin(thz));
+	Rz.set(1, 1, Math.cos(thx));
 	Rz.set(1, 2, 0);
 	Rz.set(1, 3, 0);
 	Rz.set(2, 0, 0);
