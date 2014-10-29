@@ -1,0 +1,14 @@
+var v = require('vektor').vector;
+var m = require('vektor').matrix;
+var five = require("Johnny-five"),
+	board = new five.Board();
+ 
+	board.on ("ready", function() {
+
+var a = new v(1, 0, 0);
+var b = new v({x: 1, y: 2, z: 3})
+
+var c = a.add(b);
+
+console.log(c.get(3))
+});
