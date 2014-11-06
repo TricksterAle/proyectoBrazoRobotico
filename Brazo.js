@@ -133,4 +133,15 @@ function rotz(thz){
 	Rz.set(3, 2, 0);
 	Rz.set(4, 3, 1);
 }
+ var n=0;
+ var to=5;
+ var dt=to/(n-1);
+ var a2 = 0.10;
+ var a3 = 0.15;
+
+ var p_i = new v(0, 0.2, 0.1);
+ var p_f = new v(0.15, 02
+ 	)
+
+
 });
