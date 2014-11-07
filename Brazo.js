@@ -131,7 +131,7 @@ function rotz(thz){
 	Rz.set(3, 0, 0);
 	Rz.set(3, 1, 0);
 	Rz.set(3, 2, 0);
-	Rz.set(4, 3, 1);
+	Rz.set(3, 3, 1);
 }
  var n=0;
  var to=5;
@@ -139,50 +139,55 @@ function rotz(thz){
  var a2 = 0.10;
  var a3 = 0.15;
 
- var pi = new v(0, 0.2, 0.1);
- var p_i = pi.transpose();
- var pf = new v(0.15, 0.2, 0.2);
- var p_f = pf.transpose();
- var d2 = p_i.get(3);
- var vi= new v(0, 0, 0);
- var vf = new v(0, 0.1, 0);
- var v_i = vi.transpose();
- var v_f = vf.transpose();
  
- var a_x = p_i.get(1);
- var a_y = p_i.get(2);
- var b_x = v_i.get(1);
- var b_y = v_i.get(2);
- var c_x = (p_f.get(1)-p_i.get(1)-v_i.get(1) * to + (v_i.get(1)-v_f.get(1))*(to/3)/((to^2)/3);
- var d_x = (v_f.get(1)-v_i.get(1)-2*c_x*to)/(3*(to^2);
- var c_y = (p_f.get(2)-p_i.get(2)-v_i.get(2)*to+(v_i.get(2)-v_f.get(2))*(to/3)/((to^2)/3);
- var d_y = (v_f.get(2)-v_i.get(2)-2*c_y*to)/(3*(to^2));
+ var p_i = new m(3,1);
+ p_i.set(0,0, 0);
+ p_i.set(1,0, 0.2);
+ p_i.set(2,0, 0.1);
+ var p_f = new m(3,1);
+ p_f.set(0,0, 0.15);
+ p_f.set(1,0, 0.2);
+ p_f.set(2,0, 0.1);
+ var d2 = p_i.get(2);
+ var v_i= new m(3, 1);
+ p_f.set(0,0, 0);
+ p_f.set(1,0, 0);
+ p_f.set(2,0, 0);
+ var v_f = new m(3, 1);
+ p_f.set(0,0, 0);
+ p_f.set(1,0, 0.1);
+ p_f.set(2,0, 0.1);
+ 
+ var a_x = p_i.get(0);
+ var a_y = p_i.get(1);
+ var b_x = v_i.get(0);
+ var b_y = v_i.get(1);
+ var c_x = (p_f.get(0)-p_i.get(0)-v_i.get(0) * to + (v_i.get(0)-v_f.get(0))*(to/3)/((to^2)/3));
+ var d_x = (v_f.get(0)-v_i.get(0)-2*c_x*to)/(3*(to^2));
+ var c_y = (p_f.get(1)-p_i.get(1)-v_i.get(1)*to+(v_i.get(1)-v_f.get(1))*(to/3)/((to^2)/3));
+ var d_y = (v_f.get(1)-v_i.get(1)-2*c_y*to)/(3*(to^2));
 
-for(k=0, k<(n-1),k++){
-    t=k*dt;
-    tp(k+1)=t;
+for(k=0; k<(n-1); k++){
+    var t=k*dt;
+    var tp=t;
     //calculo de la posición cartesiana
-    x(k+1)=a_x+b_x*t+c_x*(t^2)+d_x*(t^3);
-    y(k+1)=a_y+b_y*t+c_y*(t^2)+d_y*(t^3);
+    x=a_x+b_x*t+c_x*(t^2)+d_x*(t^3);
+    y=a_y+b_y*t+c_y*(t^2)+d_y*(t^3);
     
 
     //calculo de cinemática inversa
-    var r=sqrt((x(k+1)^2)+(y(k+1)^2));
+    var r=Math.sqrt((x^2)+(y^2));
     var D=(((r^2)-(a2^2)-(a3^2))/(2*a2*a3))
     var A=(((r^2)+(a2^2)-(a3^2))/(2*a2*r))
-    var S=sqrt(1-(D^2));
-    var Th1(k+1) = atan2(S,D);
-    var Th0(k+1) = atan2(y(k+1),x(k+1))-atan2((sqrt(1-A^2)),A);
-    var d2 = d2 + ((p_f.get(3)-p_i.get(3))/n);
-    var d1(k+1)= 0.25 - d2;
+    var S=Math.sqrt(1-(D^2));
+    var Th1 = Math.atan2(S,D);
+    var Th0 = Math.atan2(y,x)-Math.atan2((sqrt(1-A^2)),A);
+    var d2 = d2 + ((p_f.get(2)-p_i.get(2))/n);
+    var d1 = (0.25 - d2);
+    servo.to(Th0,dt);
+    servo.to(Th0,dt);
   
-    var T0_1=Rz(Th0(k+1))*dz(0.25);
-    var T1_2=dx(0.10);
-    var T2_3=Rz(Th1(k+1))*dx(0.15)*Rx(pi);
-    var T3_4=dz(d1(k+1));
-    var T0_4=T0_1*T1_2*T2_3*T3_4;
-    var T0_3=T0_1*T1_2*T2_3;
-    var T0_2=T0_1*T1_2;
+    
  };
 
 }); 
