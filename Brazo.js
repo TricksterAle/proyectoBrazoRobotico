@@ -4,6 +4,8 @@ var five = require("Johnny-five"),
 	board = new five.Board();
  
 	board.on ("ready", function() {
+		var servo1 = new five.Servo(10);
+		var servo2 = new five.Servo(11);
 var ax=0;
 var ay=0;
 var az=0;
@@ -184,8 +186,8 @@ for(k=0; k<(n-1); k++){
     var Th0 = Math.atan2(y,x)-Math.atan2((sqrt(1-A^2)),A);
     var d2 = d2 + ((p_f.get(2)-p_i.get(2))/n);
     var d1 = (0.25 - d2);
-    servo.to(Th0,dt);
-    servo.to(Th0,dt);
+    servo1.to(Th0,dt);
+    servo2.to(Th0,dt);
   
     
  };
