@@ -135,7 +135,7 @@ function rotz(thz){
 	Rz.set(3, 2, 0);
 	Rz.set(3, 3, 1);
 }
- var n=0;
+ var n=10;
  var to=5;
  var dt=to/(n-1);
  var a2 = 0.10;
