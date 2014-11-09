@@ -183,7 +183,7 @@ for(k=0; k<(n-1); k++){
     var A=(((r^2)+(a2^2)-(a3^2))/(2*a2*r))
     var S=Math.sqrt(1-(D^2));
     var Th1 = Math.atan2(S,D);
-    var Th0 = Math.atan2(y,x)-Math.atan2((sqrt(1-A^2)),A);
+    var Th0 = Math.atan2(y,x)-Math.atan2((Math.sqrt(1-A^2)),A);
     var d2 = d2 + ((p_f.get(2)-p_i.get(2))/n);
     var d1 = (0.25 - d2);
     servo1.to(Th0,dt);
