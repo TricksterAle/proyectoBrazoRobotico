@@ -175,7 +175,7 @@ function rotz(thz){
 
 for(k=0; k<(n-1); k++){
     var t=k*dt;
-    var tp=t;
+  
     //calculo de la posición cartesiana
     var x=a_x+(b_x*t)+(c_x*(t^2))+(d_x*(t^3));
     var y=a_y+(b_y*t)+(c_y*(t^2))+(d_y*(t^3));
@@ -188,7 +188,7 @@ for(k=0; k<(n-1); k++){
     var S=Math.sqrt(1-(D^2));
     var Th1 = Math.atan2(S,D);
     var Th0 = Math.atan2(y,x)-Math.atan2((Math.sqrt(1-A^2)),A);
-    var d2 = d2 + ((p_f.get(2)-p_i.get(2))/n);
+    var d2 = d2 + ((p_f.get(2,0)-p_i.get(2,0))/n);
     var d1 = (0.25 - d2);
     servo1.to(Th0,dt);
     servo2.to(Th1,dt);
