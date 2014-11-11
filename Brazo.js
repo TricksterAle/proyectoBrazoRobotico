@@ -146,35 +146,39 @@ function rotz(thz){
  p_i.set(0,0, 0);
  p_i.set(1,0, 0.2);
  p_i.set(2,0, 0.1);
+ 
  var p_f = new m(3,1);
  p_f.set(0,0, 0.15);
  p_f.set(1,0, 0.2);
  p_f.set(2,0, 0.1);
- var d2 = p_i.get(2);
- var v_i= new m(3, 1);
- p_f.set(0,0, 0);
- p_f.set(1,0, 0);
- p_f.set(2,0, 0);
- var v_f = new m(3, 1);
- p_f.set(0,0, 0);
- p_f.set(1,0, 0.1);
- p_f.set(2,0, 0.1);
  
- var a_x = p_i.get(0);
- var a_y = p_i.get(1);
- var b_x = v_i.get(0);
- var b_y = v_i.get(1);
- var c_x = (p_f.get(0)-p_i.get(0)-v_i.get(0) * to + (v_i.get(0)-v_f.get(0))*(to/3)/((to^2)/3));
- var d_x = (v_f.get(0)-v_i.get(0)-2*c_x*to)/(3*(to^2));
- var c_y = (p_f.get(1)-p_i.get(1)-v_i.get(1)*to+(v_i.get(1)-v_f.get(1))*(to/3)/((to^2)/3));
- var d_y = (v_f.get(1)-v_i.get(1)-2*c_y*to)/(3*(to^2));
+ var d2 = p_i.get(2,0);
+ 
+ var v_i= new m(3, 1);
+ p_f.set(0,0,0);
+ p_f.set(1,0,0);
+ p_f.set(2,0,0);
+ 
+ var v_f = new m(3, 1);
+ p_f.set(0,0,0);
+ p_f.set(1,0,0.1);
+ p_f.set(2,0,0.1);
+ 
+ var a_x = p_i.get(0,0);
+ var a_y = p_i.get(1,0);
+ var b_x = v_i.get(0,0);
+ var b_y = v_i.get(1,0);
+ var c_x = (p_f.get(0,0)-p_i.get(0,0)-v_i.get(0,0) * to + (v_i.get(0,0)-v_f.get(0,0))*(to/3)/((to^2)/3));
+ var d_x = (v_f.get(0,0)-v_i.get(0,0)-2*c_x*to)/(3*(to^2));
+ var c_y = (p_f.get(1,0)-p_i.get(1,0)-v_i.get(1,0)*to+(v_i.get(1,0)-v_f.get(1,0))*(to/3)/((to^2)/3));
+ var d_y = (v_f.get(1,0)-v_i.get(1,0)-2*c_y*to)/(3*(to^2));
 
 for(k=0; k<(n-1); k++){
     var t=k*dt;
     var tp=t;
     //calculo de la posición cartesiana
-    x=a_x+b_x*t+c_x*(t^2)+d_x*(t^3);
-    y=a_y+b_y*t+c_y*(t^2)+d_y*(t^3);
+    var x=a_x+(b_x*t)+(c_x*(t^2))+(d_x*(t^3));
+    var y=a_y+(b_y*t)+(c_y*(t^2))+(d_y*(t^3));
     
 
     //calculo de cinemática inversa
@@ -187,7 +191,7 @@ for(k=0; k<(n-1); k++){
     var d2 = d2 + ((p_f.get(2)-p_i.get(2))/n);
     var d1 = (0.25 - d2);
     servo1.to(Th0,dt);
-    servo2.to(Th0,dt);
+    servo2.to(Th1,dt);
   
     
  };
