@@ -6,6 +6,10 @@ var five = require("Johnny-five"),
 	board.on ("ready", function() {
 		var servo1 = new five.Servo(10);
 		var servo2 = new five.Servo(11);
+
+		this.repl.inject({
+			servo:servo1
+		});
 var ax=0;
 var ay=0;
 var az=0;
@@ -146,23 +150,26 @@ function rotz(thz){
  p_i.set(0,0, 0);
  p_i.set(1,0, 0.2);
  p_i.set(2,0, 0.1);
- 
+ console.log(p_i)
+
  var p_f = new m(3,1);
  p_f.set(0,0, 0.15);
  p_f.set(1,0, 0.2);
- p_f.set(2,0, 0.1);
+ p_f.set(2,0, 0.2);
  
+ console.log(p_f)
+
  var d2 = p_i.get(2,0);
  
  var v_i= new m(3, 1);
- p_f.set(0,0,0);
- p_f.set(1,0,0);
- p_f.set(2,0,0);
+ v_i.set(0,0,0);
+ v_i.set(1,0,0);
+ v_i.set(2,0,0);
  
  var v_f = new m(3, 1);
- p_f.set(0,0,0);
- p_f.set(1,0,0.1);
- p_f.set(2,0,0.1);
+ v_f.set(0,0,0);
+ v_f.set(1,0,0.1);
+ v_f.set(2,0,0.2);
  
  var a_x = p_i.get(0,0);
  var a_y = p_i.get(1,0);
@@ -173,7 +180,7 @@ function rotz(thz){
  var c_y = (p_f.get(1,0)-p_i.get(1,0)-v_i.get(1,0)*to+(v_i.get(1,0)-v_f.get(1,0))*(to/3)/((to^2)/3));
  var d_y = (v_f.get(1,0)-v_i.get(1,0)-2*c_y*to)/(3*(to^2));
 
-for(k=0; k<(n-1); k++){
+for(k=0; k<=2; k++){
     var t=k*dt;
   
     //calculo de la posición cartesiana
@@ -190,10 +197,11 @@ for(k=0; k<(n-1); k++){
     var Th0 = Math.atan2(y,x)-Math.atan2((Math.sqrt(1-A^2)),A);
     var d2 = d2 + ((p_f.get(2,0)-p_i.get(2,0))/n);
     var d1 = (0.25 - d2);
-    servo1.to(Th0,dt);
-    servo2.to(Th1,dt);
-  
-    
+    servo1.to(90+((Th0*180)/Math.PI),dt);
+    servo2.to(90+((Th1*180)/Math.PI),dt);
+  	console.log(Th0)
+  	console.log(90+((Th0*180)/Math.PI))
+  	console.log("-------------------------")   
  };
 
 }); 
