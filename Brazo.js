@@ -139,22 +139,22 @@ function rotz(thz){
 	Rz.set(3, 2, 0);
 	Rz.set(3, 3, 1);
 }
- var n=10;
+ var n=20;
  var to=5;
- var dt=to/(n-1);
- var a2 = 0.10;
- var a3 = 0.15;
+ var dt=to/(n);
+ var a2 = 0.11;
+ var a3 = 0.13;
 
  
  var p_i = new m(3,1);
  p_i.set(0,0, 0);
- p_i.set(1,0, 0.2);
+ p_i.set(1,0, 0.13);
  p_i.set(2,0, 0.1);
  console.log(p_i)
 
  var p_f = new m(3,1);
- p_f.set(0,0, 0.15);
- p_f.set(1,0, 0.2);
+ p_f.set(0,0, -0.11);
+ p_f.set(1,0, 0);
  p_f.set(2,0, 0.2);
  
  console.log(p_f)
@@ -168,40 +168,51 @@ function rotz(thz){
  
  var v_f = new m(3, 1);
  v_f.set(0,0,0);
- v_f.set(1,0,0.1);
- v_f.set(2,0,0.2);
+ v_f.set(1,0,0);
+ v_f.set(2,0,0);
  
  var a_x = p_i.get(0,0);
  var a_y = p_i.get(1,0);
  var b_x = v_i.get(0,0);
  var b_y = v_i.get(1,0);
- var c_x = (p_f.get(0,0)-p_i.get(0,0)-v_i.get(0,0) * to + (v_i.get(0,0)-v_f.get(0,0))*(to/3)/((to^2)/3));
- var d_x = (v_f.get(0,0)-v_i.get(0,0)-2*c_x*to)/(3*(to^2));
- var c_y = (p_f.get(1,0)-p_i.get(1,0)-v_i.get(1,0)*to+(v_i.get(1,0)-v_f.get(1,0))*(to/3)/((to^2)/3));
- var d_y = (v_f.get(1,0)-v_i.get(1,0)-2*c_y*to)/(3*(to^2));
+ var c_x = (p_f.get(0,0)-p_i.get(0,0)-(v_i.get(0,0)*to) + ((v_i.get(0,0)-v_f.get(0,0))*(to/3))/((Math.pow(to,2)/3)));
+ var d_x = (v_f.get(0,0)-v_i.get(0,0)-2*c_x*to)/(3*(Math.pow(to,2)));
+ var c_y = (p_f.get(1,0)-p_i.get(1,0)-v_i.get(1,0)*to+(v_i.get(1,0)-v_f.get(1,0))*(to/3))/((Math.pow(to,2))/3);
+ var d_y = (v_f.get(1,0)-v_i.get(1,0)-2*c_y*to)/(3*(Math.pow(to,2)));
+ console.log('+++++++++++++++')
+ console.log(c_y)
 
-for(k=0; k<=2; k++){
+ console.log('+++++++++++++++')
+for(k=0; k<=5; k++){
     var t=k*dt;
   
     //calculo de la posición cartesiana
-    var x=a_x+(b_x*t)+(c_x*(t^2))+(d_x*(t^3));
-    var y=a_y+(b_y*t)+(c_y*(t^2))+(d_y*(t^3));
+    var x=a_x+(b_x*t)+(c_x*(Math.pow(t,2)))+(d_x*(Math.pow(t,3)));
+    var y=a_y+(b_y*t)+(c_y*(Math.pow(t,2)))+(d_y*(Math.pow(t,3)));
     
-
-    //calculo de cinemática inversa
-    var r=Math.sqrt((x^2)+(y^2));
-    var D=(((r^2)-(a2^2)-(a3^2))/(2*a2*a3))
-    var A=(((r^2)+(a2^2)-(a3^2))/(2*a2*r))
-    var S=Math.sqrt(1-(D^2));
-    var Th1 = Math.atan2(S,D);
-    var Th0 = Math.atan2(y,x)-Math.atan2((Math.sqrt(1-A^2)),A);
+    //cinemática inversa
+    var r=Math.sqrt(Math.pow(x.toFixed(4),2)+Math.pow(y.toFixed(4),2));
+    var D=(((Math.pow(r.toFixed(4),2))-(Math.pow(a2,2))-(Math.pow(a3,2)))/(2*a2*a3))
+    var A=(((Math.pow(r.toFixed(4),2))+(Math.pow(a2,2))-(Math.pow(a3,2)))/(2*a2*r.toFixed(4)))
+    var S=Math.sqrt(1-(Math.pow(D.toFixed(4),2)));
+    var Th1 = Math.atan2(S.toFixed(4),D.toFixed(4));
+    var Th0 = Math.atan2(y.toFixed(4),x.toFixed(4))-Math.atan2((Math.sqrt(1-Math.pow(A.toFixed(4),2))),A.toFixed(4));
     var d2 = d2 + ((p_f.get(2,0)-p_i.get(2,0))/n);
     var d1 = (0.25 - d2);
-    servo1.to(90+((Th0*180)/Math.PI),dt);
-    servo2.to(90+((Th1*180)/Math.PI),dt);
-  	console.log(Th0)
-  	console.log(90+((Th0*180)/Math.PI))
-  	console.log("-------------------------")   
+    
+	servo1.to(((Th0.toFixed(4)*180)/Math.PI),dt*1000);
+    servo2.to(((Th1.toFixed*180)/Math.PI),dt*1000);
+    console.log(t)
+    console.log(x)
+    console.log(Th0)
+
+  	console.log((Th0.toFixed(4)*180)/Math.PI)
+  	console.log(Th1)
+    
+  	console.log((Th1.toFixed(4)*180)/Math.PI)
+  	console.log("-------------------------");   
+	
+  	
  };
 
 }); 
