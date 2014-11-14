@@ -189,7 +189,7 @@ function rotz(thz){
 
 
  var n=20;
- var to=10;
+ var to=20;
  var dt=to/(n);
  var a2 = 0.11;
  var a3 = 0.13;
