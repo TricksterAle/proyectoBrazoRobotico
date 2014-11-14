@@ -138,14 +138,66 @@ function rotz(thz){
 	Rz.set(3, 1, 0);
 	Rz.set(3, 2, 0);
 	Rz.set(3, 3, 1);
-}
+};
+ 
+ var p = new m(2,10)
+ p.set(0,0,);
+ p.set(0,1,);
+ p.set(0,2,);
+ p.set(0,3,);
+ p.set(0,4,);
+ p.set(0,5,);
+ p.set(0,6,);
+ p.set(0,7,);
+ p.set(0,8,);
+ p.set(0,9,);
+ p.set(1,0,);
+ p.set(1,1,);
+ p.set(1,2,);
+ p.set(1,3,);
+ p.set(1,4,);
+ p.set(1,5,);
+ p.set(1,6,);
+ p.set(1,7,);
+ p.set(1,8,);
+ p.set(1,9,);
+
+ var v = new m(2,10)
+ v.set(0,0,0);
+ v.set(0,1,0);
+ v.set(0,2,0);
+ v.set(0,3,0);
+ v.set(0,4,0);
+ v.set(0,5,0);
+ v.set(0,6,0);
+ v.set(0,7,0);
+ v.set(0,8,0);
+ v.set(0,9,0);
+ v.set(1,0,0);
+ v.set(1,1,0);
+ v.set(1,2,0);
+ v.set(1,3,0);
+ v.set(1,4,0);
+ v.set(1,5,0);
+ v.set(1,6,0);
+ v.set(1,7,0);
+ v.set(1,8,0);
+ v.set(1,9,0);
+
+
+
+
+
  var n=20;
  var to=5;
  var dt=to/(n);
  var a2 = 0.11;
  var a3 = 0.13;
 
- 
+for(a=0, a<=10,a++){
+
+
+
  var p_i = new m(3,1);
  p_i.set(0,0, 0);
  p_i.set(1,0, 0.13);
@@ -175,7 +227,7 @@ function rotz(thz){
  var a_y = p_i.get(1,0);
  var b_x = v_i.get(0,0);
  var b_y = v_i.get(1,0);
- var c_x = (p_f.get(0,0)-p_i.get(0,0)-(v_i.get(0,0)*to) + ((v_i.get(0,0)-v_f.get(0,0))*(to/3))/((Math.pow(to,2)/3)));
+ var c_x = (p_f.get(0,0)-p_i.get(0,0)-v_i.get(0,0)*to + (v_i.get(0,0)-v_f.get(0,0))*(to/3))/((Math.pow(to,2)/3));
  var d_x = (v_f.get(0,0)-v_i.get(0,0)-2*c_x*to)/(3*(Math.pow(to,2)));
  var c_y = (p_f.get(1,0)-p_i.get(1,0)-v_i.get(1,0)*to+(v_i.get(1,0)-v_f.get(1,0))*(to/3))/((Math.pow(to,2))/3);
  var d_y = (v_f.get(1,0)-v_i.get(1,0)-2*c_y*to)/(3*(Math.pow(to,2)));
@@ -183,7 +235,7 @@ function rotz(thz){
  console.log(c_y)
 
  console.log('+++++++++++++++')
-for(k=0; k<=5; k++){
+for(k=0; k<=n; k++){
     var t=k*dt;
   
     //calculo de la posición cartesiana
@@ -214,5 +266,6 @@ for(k=0; k<=5; k++){
 	
   	
  };
+};
 
 }); 
