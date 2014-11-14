@@ -141,26 +141,26 @@ function rotz(thz){
 };
  
  var p = new m(2,10)
- p.set(0,0,);
- p.set(0,1,);
- p.set(0,2,);
- p.set(0,3,);
- p.set(0,4,);
- p.set(0,5,);
- p.set(0,6,);
- p.set(0,7,);
- p.set(0,8,);
- p.set(0,9,);
- p.set(1,0,);
- p.set(1,1,);
- p.set(1,2,);
- p.set(1,3,);
- p.set(1,4,);
- p.set(1,5,);
- p.set(1,6,);
- p.set(1,7,);
- p.set(1,8,);
- p.set(1,9,);
+ p.set(0,0,0.11);
+ p.set(0,1,0.06);
+ p.set(0,2,0.04);
+ p.set(0,3,0);
+ p.set(0,4,-0.04);
+ p.set(0,5,-0.06);
+ p.set(0,6,-0.11);
+ p.set(0,7,-0.05);
+ p.set(0,8,0.05);
+ p.set(0,9,0.11);
+ p.set(1,0,0.13);
+ p.set(1,1,0.18);
+ p.set(1,2,0.215);
+ p.set(1,3,0.24);
+ p.set(1,4,0.215);
+ p.set(1,5,0.18);
+ p.set(1,6,0.13);
+ p.set(1,7,0.13);
+ p.set(1,8,0.13);
+ p.set(1,9,0.13);
 
  var v = new m(2,10)
  v.set(0,0,0);
@@ -189,24 +189,24 @@ function rotz(thz){
 
 
  var n=20;
- var to=5;
+ var to=10;
  var dt=to/(n);
  var a2 = 0.11;
  var a3 = 0.13;
 
-for(a=0, a<=10,a++){
+for(a=0; a<9;a++){
 
 
 
  var p_i = new m(3,1);
- p_i.set(0,0, 0);
- p_i.set(1,0, 0.13);
- p_i.set(2,0, 0.1);
+ p_i.set(0,0, p.get(0,a));
+ p_i.set(1,0, p.get(1,a));
+ p_i.set(2,0, 0.13);
  console.log(p_i)
 
  var p_f = new m(3,1);
- p_f.set(0,0, -0.11);
- p_f.set(1,0, 0);
+ p_f.set(0,0, p.get(0,(a+1)));
+ p_f.set(1,0, p.get(1,(a+1)));
  p_f.set(2,0, 0.2);
  
  console.log(p_f)
@@ -252,8 +252,9 @@ for(k=0; k<=n; k++){
     var d2 = d2 + ((p_f.get(2,0)-p_i.get(2,0))/n);
     var d1 = (0.25 - d2);
     
-	servo1.to(((Th0.toFixed(4)*180)/Math.PI),dt*1000);
-    servo2.to(((Th1.toFixed*180)/Math.PI),dt*1000);
+    this.wait(dt, function() {
+    servo1.to(((Th0.toFixed(4)*180)/Math.PI),dt);
+    servo2.to(((Th1.toFixed*180)/Math.PI),dt);
     console.log(t)
     console.log(x)
     console.log(Th0)
@@ -262,10 +263,14 @@ for(k=0; k<=n; k++){
   	console.log(Th1)
     
   	console.log((Th1.toFixed(4)*180)/Math.PI)
-  	console.log("-------------------------");   
+  	console.log("-------------------------"); 
+
+  });
+	
 	
   	
  };
 };
+
 
 }); 
